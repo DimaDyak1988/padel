@@ -11,3 +11,8 @@
     name: string;
   }>{}
 </script>
+
+<style lang="scss" scoped>
+.page-header {
+}
+</style>

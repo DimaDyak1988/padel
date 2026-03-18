@@ -10,6 +10,6 @@
   padding: 15px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #F8F9FA;
 }
 </style>
