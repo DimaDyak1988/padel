@@ -11,4 +11,10 @@
 
 <script setup lang="ts">
 import Wrapper from '@/components/layout/Wrapper.vue';
+
+const a = 1;
+const user = {
+  name: 'Dima',
+  age: 2323,
+};
 </script>
