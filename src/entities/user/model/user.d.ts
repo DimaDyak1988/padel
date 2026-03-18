@@ -6,5 +6,5 @@ export interface User {
   role: UserRole;
   contact: string;
   rating: number;
+  avatar?: string;
 }
-
