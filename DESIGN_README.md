@@ -4,24 +4,28 @@
 
 | Элемент | Шрифт | Размер | Вес | Высота строки | Пример |
 |---------|-------|-------|----|---------------|--------|
-| Заголовок H1 | Montserrat, sans-serif | 48px | 700 | 1.2 | <span style="font-family:'Montserrat', sans-serif; font-size:48px; font-weight:700;">Заголовок H1</span> |
-| Заголовок H2 | Montserrat, sans-serif | 36px | 600 | 1.3 | <span style="font-family:'Montserrat', sans-serif; font-size:36px; font-weight:600;">Заголовок H2</span> |
-| Заголовок H3 | Montserrat, sans-serif | 28px | 500 | 1.3 | <span style="font-family:'Montserrat', sans-serif; font-size:28px; font-weight:500;">Заголовок H3</span> |
-| Основной текст | Roboto, sans-serif | 16px | 400 | 1.5 | <span style="font-family:'Roboto', sans-serif; font-size:16px; font-weight:400;">Основной текст</span> |
-| Мелкий текст / подписи | Roboto, sans-serif | 14px | 400 | 1.4 | <span style="font-family:'Roboto', sans-serif; font-size:14px; font-weight:400;">Мелкий текст / подписи</span> |
+| Заголовок H1 | Montserrat | 48px | 700 | 1.2 | **Заголовок H1** |
+| Заголовок H2 | Montserrat | 36px | 600 | 1.3 | **Заголовок H2** |
+| Заголовок H3 | Montserrat | 28px | 500 | 1.3 | **Заголовок H3** |
+| Основной текст | Roboto | 16px | 400 | 1.5 | Основной текст |
+| Мелкий текст / подписи | Roboto | 14px | 400 | 1.4 | Мелкий текст / подписи |
+
+> Примечание: GitHub не поддерживает кастомные шрифты, поэтому визуально шрифты показываются через жирность и размер текста.
 
 ## 2. Цветовая палитра
 
 | Цвет | HEX | Применение | Пример |
 |------|-----|------------|--------|
-| Primary | #007BFF | Кнопки, ссылки, акценты | <span style="color:#007BFF;">Пример текста</span> |
-| Secondary | #6C757D | Фоны, второстепенные кнопки | <span style="color:#6C757D;">Пример текста</span> |
-| Accent | #FFC107 | Акценты, иконки, уведомления | <span style="color:#FFC107;">Пример текста</span> |
-| Background | #F8F9FA | Основной фон страниц | <span style="background-color:#F8F9FA;">Фон страницы</span> |
-| Card / Surface | #FFFFFF | Карточки, модальные окна | <span style="background-color:#FFFFFF; color:#212529;">Карточка</span> |
-| Text Primary | #212529 | Основной текст | <span style="color:#212529;">Основной текст</span> |
-| Text Secondary | #495057 | Второстепенный текст | <span style="color:#495057;">Второстепенный текст</span> |
-| Danger | #DC3545 | Ошибки, предупреждения | <span style="color:#DC3545;">Ошибка / предупреждение</span> |
+| Primary | #007BFF | Кнопки, ссылки, акценты | ▇▇▇▇▇ |
+| Secondary | #6C757D | Фоны, второстепенные кнопки | ▇▇▇▇▇ |
+| Accent | #FFC107 | Акценты, иконки, уведомления | ▇▇▇▇▇ |
+| Background | #F8F9FA | Основной фон страниц | ▇▇▇▇▇ |
+| Card / Surface | #FFFFFF | Карточки, модальные окна | ▇▇▇▇▇ |
+| Text Primary | #212529 | Основной текст | ▇▇▇▇▇ |
+| Text Secondary | #495057 | Второстепенный текст | ▇▇▇▇▇ |
+| Danger | #DC3545 | Ошибки, предупреждения | ▇▇▇▇▇ |
+
+> Примечание: цветные блоки ▇▇▇▇▇ имитируют цвет для визуального восприятия в GitHub.
 
 ## 3. Отступы и сетка
 
