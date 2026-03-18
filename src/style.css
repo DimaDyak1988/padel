@@ -1,14 +1,45 @@
+:root {
+  /* Colors */
+  --color-primary: #007BFF;
+  --color-secondary: #6C757D;
+  --color-accent: #FFC107;
+  --color-bg: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #212529;
+  --color-text-secondary: #495057;
+  --color-danger: #DC3545;
+  --color-border: #E6E7EC;
+
+  /* Typography */
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+
+  --font-h1: 48px;
+  --font-h2: 36px;
+  --font-h3: 28px;
+  --font-body: 16px;
+  --font-small: 14px;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+}
+
 body { 
   font-family: 'Roboto', sans-serif;
   background-color: #f3f3f3;
   font-size: var(--font-body);
   font-weight: 400;
   line-height: 1.5;
+  color: var(--color-text-primary);
 }
 
 #app {
-  padding: 15px;
-  height: calc(100vh - 60px);
+  padding: var(--space-md);
 }
 
 h1, h2, h3 {
@@ -28,7 +59,6 @@ h1 {
   font-size: 14px;
   line-height: 1.4;
 }
-
 
 /* --- Background Colors --- */
 .bg-primary { background-color: var(--color-primary); }
@@ -52,34 +82,3 @@ h1 {
 .border-background { border-color: var(--color-bg); }
 .border-card { border-color: var(--color-surface); }
 .border-danger { border-color: var(--color-danger); }
-
-
-:root {
-  /* Colors */
-  --color-primary: #007BFF;
-  --color-secondary: #6C757D;
-  --color-accent: #FFC107;
-  --color-bg: #F8F9FA;
-  --color-surface: #FFFFFF;
-  --color-text-primary: #212529;
-  --color-text-secondary: #495057;
-  --color-danger: #DC3545;
-
-  /* Typography */
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Roboto', sans-serif;
-
-  --font-h1: 48px;
-  --font-h2: 36px;
-  --font-h3: 28px;
-  --font-body: 16px;
-  --font-small: 14px;
-
-  /* Spacing */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-xxl: 48px;
-}

@@ -27,14 +27,19 @@ export default [
     rules: {
       'no-console': 'warn',
       'vue/multi-word-component-names': 'off',
-      'semi': ['warn', 'always'], // всегда ставим точку с запятой,
-      'comma-dangle': ['warn', {
+      'semi': ['error', 'always'], // всегда ставим точку с запятой,
+      'comma-dangle': ['error', {
         arrays: 'always-multiline',    // массивы
         objects: 'always-multiline',   // объекты
         imports: 'always-multiline',   // импорты
         exports: 'always-multiline',   // экспорты
         functions: 'never'             // функции без trailing comma
-      }]
+      }],
+      // Пробелы внутри фигурных скобок объекта: { key: value }
+      'object-curly-spacing': ['error', 'always'],
+
+      // Пробелы внутри квадратных скобок массива: [ 1, 2, 3 ]
+      'array-bracket-spacing': ['error', 'always'],
     },
   },
 ];

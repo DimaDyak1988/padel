@@ -1,5 +1,5 @@
-import HomePage from '@/pages/HomePage.vue'
-import UsersPage from '@/pages/UsersPage.vue'
+import HomePage from '@/pages/HomePage.vue';
+import UsersPage from '@/pages/UsersPage.vue';
 
 export default [
   { 
@@ -10,6 +10,6 @@ export default [
   { 
     path: '/users',
     name: 'users',
-    component: UsersPage
-  }
-]
+    component: UsersPage,
+  },
+];
