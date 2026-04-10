@@ -12,4 +12,10 @@ export default [
     name: 'users',
     component: UsersPage,
   },
-];
+] as const satisfies StrictRoute[];
+
+export type RouteName = typeof routes[number]['name'];
+export type RoutePath = typeof routes[number]['path'];
+
+
+export default routes

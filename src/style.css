@@ -1,84 +1,62 @@
 :root {
-  /* Colors */
+  /* ... твои цвета ... */
   --color-primary: #007BFF;
-  --color-secondary: #6C757D;
-  --color-accent: #FFC107;
-  --color-bg: #F8F9FA;
-  --color-surface: #FFFFFF;
-  --color-text-primary: #212529;
-  --color-text-secondary: #495057;
-  --color-danger: #DC3545;
   --color-border: #E6E7EC;
 
   /* Typography */
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Roboto', sans-serif;
+  --font-family-heading: 'Montserrat', sans-serif;
+  --font-family-body: 'Roboto', sans-serif;
 
-  --font-h1: 48px;
-  --font-h2: 36px;
-  --font-h3: 28px;
-  --font-body: 16px;
-  --font-small: 14px;
+  /* Font Sizes - используем rem для доступности */
+  --font-h1: 3rem;     /* 48px */
+  --font-h2: 2.25rem;  /* 36px */
+  --font-h3: 1.75rem;  /* 28px */
+  --font-body: 1rem;   /* 16px */
+  --font-small: 0.875rem; /* 14px */
+
+  /* Line Heights */
+  --lh-heading: 1.2;
+  --lh-body: 1.5;
 
   /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
-  --space-xl: 32px;
-  --space-xxl: 48px;
 }
 
-body { 
-  font-family: 'Roboto', sans-serif;
+/* Reset & Base */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-body);
   background-color: #f3f3f3;
   font-size: var(--font-body);
-  font-weight: 400;
-  line-height: 1.5;
+  line-height: var(--lh-body);
   color: var(--color-text-primary);
 }
 
-#app {
-  padding: var(--space-md);
-}
-
 h1, h2, h3 {
+  font-family: var(--font-family-heading);
+  line-height: var(--lh-heading);
   margin: 0;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
 }
 
-h1 {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: var(--font-h1);
-  margin-bottom: var(--space-lg);
-}
+h1 { font-size: var(--font-h1); font-weight: 700; margin-bottom: var(--space-lg); }
+h2 { font-size: var(--font-h2); font-weight: 600; }
+h3 { font-size: var(--font-h3); font-weight: 600; }
 
 .text-small {
-  font-size: 14px;
+  font-size: var(--font-small);
   line-height: 1.4;
 }
 
-/* --- Background Colors --- */
-.bg-primary { background-color: var(--color-primary); }
-.bg-secondary { background-color: var(--color-secondary); }
-.bg-accent { background-color: var(--color-accent); }
-.bg-background { background-color: var(--color-bg); }
-.bg-card { background-color: var(--color-surface); }
-.bg-danger { background-color: var(--color-danger); }
-
-/* --- Text Colors --- */
-.text-primary { color: var(--color-text-primary); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-accent { color: var(--color-accent); }
-.text-danger { color: var(--color-danger); }
-.text-background { color: var(--color-bg); }
-
-/* --- Border Colors --- */
-.border-primary { border-color: var(--color-primary); }
-.border-secondary { border-color: var(--color-secondary); }
-.border-accent { border-color: var(--color-accent); }
-.border-background { border-color: var(--color-bg); }
-.border-card { border-color: var(--color-surface); }
-.border-danger { border-color: var(--color-danger); }
+/* Utility classes (оставляем только самые нужные) */
+.bg-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px; // добавил скругление из дизайна
+}

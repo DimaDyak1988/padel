@@ -4,13 +4,13 @@
     role="img"
     :aria-label="alt"
     :style="{ backgroundImage: `url(${src})` }"
-  ></div>
+  />
 </template>
 
 <script setup lang="ts">
 defineOptions({ name: 'Avatar' });
 
-interface Props {
+export interface Props {
   src: string;
   alt: string;
 }

@@ -8,8 +8,13 @@
       />
       <div class="user-card__info">
         <div class="user-card__name">{{ name }}</div>
-        <!-- <div class="user-card__role">{{ roleLabel }}</div> -->
-        <RoleLabel :role="user.role" />
+
+        <div class="tags" style="line-height: 1; display: inline-flex; flex-direction: column;">
+          <Tag value="Админ" severity="contrast"/>
+          <!-- <Tag value="Игрок" severity="success" /> -->
+          <!-- <Tag value="Тренер" severity="info" /> -->
+        </div>
+        <!-- <RoleLabel :role="user.role" /> -->
       </div>
     </div>
 
@@ -34,6 +39,7 @@
   import Rating from '@/components/ui/Rating.vue';
   import ActionButtons from '@/components/ui/ActionButtons.vue';
   import RoleLabel from '@/components/ui/RoleLabel.vue';
+  import { Tag } from 'primevue';
   import defaultAvatar from '@/assets/images/avatar_default.png';
 
   defineOptions({ name: 'UserCard' });
@@ -48,6 +54,10 @@
   }>();
 
   const { user } = props;
+
+  let num: number = 123;
+
+  num = 'asdasdsad';
 
   const avatarUrl = user.avatar || defaultAvatar;
   const contact = user.contact || 'не указан';
