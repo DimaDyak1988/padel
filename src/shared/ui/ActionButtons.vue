@@ -10,6 +10,7 @@
     <Button
       type="button"
       label="Удалить"
+      variant="outlined"
       severity="danger"
       size="small"
     />
@@ -19,11 +20,11 @@
 <script setup lang="ts">
 import { Button } from 'primevue';
 
-  defineOptions({ name: 'ActionButtons' });
-  defineEmits<{
-    (e: 'edit'): void;
-    (e: 'delete'): void;
-  }>();
+defineOptions({ name: 'ActionButtons' });
+defineEmits<{
+  (e: 'edit'): void;
+  (e: 'delete'): void;
+}>();
 </script>
 
 <style scoped lang="scss">

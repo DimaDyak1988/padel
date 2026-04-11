@@ -26,5 +26,4 @@
 </template>
 
 <script setup lang="ts">
-  import Wrapper from '@/components/layout/Wrapper.vue';
 </script>

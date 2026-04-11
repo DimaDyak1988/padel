@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="rating"
-    aria-label="Рейтинг пользователя"
-  >
+  <div class="rating">
     <span
       v-for="i in max"
       :key="i"
@@ -16,8 +13,6 @@
 </template>
 
 <script setup lang="ts">
-  defineOptions({ name: 'Rating' });
-
   interface Props {
     value: number;
     max?: number;
@@ -29,21 +24,21 @@
 </script>
 
 <style scoped lang="scss">
-  .rating {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 
-    .star {
-      color: #ffc107;
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .rating-number {
-      margin-left: 8px;
-      font-weight: 500;
-      color: #212529;
-    }
+  .star {
+    color: #ffc107;
+    font-size: 16px;
+    line-height: 1;
   }
+
+  .rating-number {
+    margin-left: 8px;
+    font-weight: 500;
+    color: #212529;
+  }
+}
 </style>

@@ -2,21 +2,16 @@
   <div
     class="avatar"
     role="img"
-    :aria-label="alt"
-    :style="{ backgroundImage: `url(${src})` }"
+    :aria-label="props.alt"
+    :style="{ backgroundImage: `url(${props.src})` }"
   />
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: 'Avatar' });
-
-export interface Props {
+const props = defineProps<{
   src: string;
   alt: string;
-}
-
-const props = defineProps<Props>();
-const { src, alt } = props;
+}>();
 </script>
 
 <style scoped lang="scss">

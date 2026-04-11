@@ -19,18 +19,31 @@
 </template>
 
 <script setup lang="ts">
-  import { User } from '@/entities/user/model/user';
-  import BaseButton from '@/components/buttons/BaseButton.vue';
-  import PageHeader from '@/components/layout/PageHeader.vue';
+  import type { User } from '@/entities/user/model/user';
+  import BaseButton from '@/shared/ui/buttons/BaseButton.vue';
+  import PageHeader from '@/shared/ui/layout/PageHeader.vue';
   import UserCard from '@/entities/user/ui/UserCard.vue';
-  import DefaultAvatar from '@/assets/images/avatar_default.png';
   import GirlAvatar from '@/assets/images/avatar_girl.jpg';
 
   defineOptions({ name: 'UserPage' });
 
   const fakeUsers: User[] = [
-    { id: '1', contact: 'alexsmith', name: 'Алексей Смирнов', role: 'player', rating: 4 },
-    { id: '2', contact: 'mariapetrov', name: 'Мария Петрова', role: 'coach', rating: 5 },
+    {
+      id: '1',
+      contact: 'alexsmith',
+      name: 'Дьяков Михаил',
+      role: 'player',
+      rating: 4,
+      avatar: 'https://i.pravatar.cc/100?img=1',
+    },
+    {
+      id: '2',
+      contact: 'mariapetrov',
+      name: 'Мария Петрова',
+      role: 'coach',
+      rating: 5,
+      avatar: 'https://i.pravatar.cc/100?img=2',
+    },
     { id: '3', contact: 'ivanivanov', name: 'Иван Иванов', role: 'player', rating: 3 },
     { id: '4', contact: 'natashakuznetsova', name: 'Наташа Кузнецова', role: 'admin', rating: 5 },
     {
