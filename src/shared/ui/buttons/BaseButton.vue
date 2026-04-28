@@ -2,7 +2,7 @@
   type Variant = 'primary' | 'secondary' | 'danger';
   type Size = 'sm' | 'md' | 'lg';
 
-  const props = defineProps<{
+const props = defineProps<{
     variant?: Variant;
     size?: Size;
     disabled?: boolean;

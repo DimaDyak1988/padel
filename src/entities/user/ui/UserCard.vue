@@ -11,15 +11,22 @@
       />
 
       <div class="user-card__info">
-        <div class="user-card__name">{{ name }}</div>
+        <div class="user-card__name">
+          {{ name }}
+        </div>
 
         <div class="tags">
-          <Tag :value="roleLabel" severity="contrast"/>
+          <Tag
+            :value="roleLabel"
+            severity="contrast"
+          />
         </div>
       </div>
     </div>
 
-    <div class="user-card__contact">@{{ contact }}</div>
+    <div class="user-card__contact">
+      @{{ contact }}
+    </div>
 
     <Rating
       class="user-card__rating"
@@ -27,37 +34,53 @@
     />
 
     <div class="user-card__actions">
-      <slot name="actions"></slot>
+      <slot name="actions" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { Tag } from 'primevue';
-  import Avatar from 'primevue/avatar';
-  import type { User } from '../model/user';
-  import type { UserRole } from '../model/userRole';
-  import Rating from '@/shared/ui/Rating.vue';
-  import defaultAvatar from '@/assets/images/avatar_default.png';
+import { computed  } from 'vue';
+import { Tag } from 'primevue';
+import Avatar from 'primevue/avatar';
+import type { User } from '../model/user';
+import type { UserRole } from '../model/userRole';
+import Rating from '@/shared/ui/Rating.vue';
+import defaultAvatar from '@/assets/images/avatar_default.png';
 
-  const props = defineProps<{
-    user: User;
-  }>();
+const props = defineProps<{
+  user: User;
+}>();
 
-  const { user } = props;
+const { user } = props;
 
-  const avatarUrl = user.avatar || defaultAvatar;
-  const contact = user.contact || 'не указан';
-  const rating = user.rating || 0;
-  const { name } = user;
+const avatarUrl = user.avatar || defaultAvatar;
+const contact = user.contact || 'не указан';
+const rating = computed(() => user.rating || 0);
+const name = computed(() => user.name);
 
-  const roleLabels: Record<UserRole, string> = {
-    player: 'Игрок',
-    coach: 'Тренер',
-    admin: 'Админ',
-  };
+const roleLabels: Record<UserRole, string> = {
+  player: 'Игрок',
+  coach: 'Тренер',
+  admin: 'Админ',
+};
 
-  const roleLabel = roleLabels[user.role];
+const roleLabel = roleLabels[user.role];
+
+// const roleClasses: Record<UserRole, string> = {
+//   player: 'role-player',
+//   coach: 'role-coach',
+//   admin: 'role-admin',
+// };
+//
+// const roleLabels: Record<UserRole, string> = {
+//   player: 'Игрок',
+//   coach: 'Тренер',
+//   admin: 'Админ',
+// };
+//
+// const roleClass = roleClasses[props.role];
+// const label = roleLabels[props.role];
 
 </script>
 
@@ -105,11 +128,6 @@
     font-size: var(--fs-sm);
     color: #495057;
   }
-
-  //.user-card__row {
-  //  font-size: var(--fs-sm);
-  //  color: #495057;
-  //}
 
   .user-card__contact {
     word-break: break-all;

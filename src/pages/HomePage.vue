@@ -18,11 +18,9 @@
     deserunt, adipisci facilis dolore quos. Modi?
   </p>
 
-  <span class="text-small"
-    >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum temporibus nostrum at
+  <span class="text-small">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum temporibus nostrum at
     laudantium illum inventore nihil magni hic. Veniam quibusdam sint voluptate autem? Est, eligendi
-    voluptas reiciendis ad minus libero!</span
-  >
+    voluptas reiciendis ad minus libero!</span>
 </template>
 
 <script setup lang="ts">

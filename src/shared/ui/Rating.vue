@@ -18,9 +18,9 @@
     max?: number;
   }
 
-  const props = defineProps<Props>();
-  const max = props.max || 5;
-  const value = props.value;
+const props = defineProps<Props>();
+const max = props.max || 5;
+const value = props.value;
 </script>
 
 <style scoped lang="scss">
