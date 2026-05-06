@@ -13,8 +13,16 @@
         v-for="(user) in users"
         :key="user.id"
         :user="user"
-      />
+      >
+        <template #actions>
+          <RemoveUserButton :id="user.id" />
+        </template>
+      </UserCard>
     </div>
+
+    <button @click="store.removeUser('2')">
+      Remove
+    </button>
   </div>
 </template>
 
@@ -23,6 +31,7 @@ import { storeToRefs } from 'pinia';
 import Button from 'primevue/button';
 import { useUserStore } from '@/entities/user';
 import { UserCard } from '@/entities/user';
+import { RemoveUserButton } from '@/features/removeUser';
 import PageHeader from '@/shared/ui/layout/PageHeader.vue';
 
 const store = useUserStore();
