@@ -1,5 +1,5 @@
 import HomePage from '@/pages/HomePage.vue';
-import { UsersPage } from '@/pages/UsersPage';
+import UsersPage from '@/pages/UsersPage.vue';
 
 export default [
   {

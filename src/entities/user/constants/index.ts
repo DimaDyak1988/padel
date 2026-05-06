@@ -1,0 +1,1 @@
+export const USERS_STORE_NAME = 'USERS_STORE';

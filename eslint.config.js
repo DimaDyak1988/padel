@@ -31,7 +31,6 @@ export default ts.config(
       'boundaries': boundaries,
     },
     settings: {
-      // Настройка слоев FSD
       'import/resolver': {
         typescript: {
           alwaysTryTypes: true,
@@ -41,18 +40,19 @@ export default ts.config(
       'boundaries/map': {
         '@': './src'
       },
+      // Элементы FSD (без рекурсивных паттернов — так правильно для определения типа)
       'boundaries/elements': [
-        { type: 'app', pattern: 'src/app/**/*' },
-        { type: 'pages', pattern: 'src/pages/**/*' },
-        { type: 'widgets', pattern: 'src/widgets/**/*' },
-        { type: 'features', pattern: 'src/features/**/*' },
-        { type: 'entities', pattern: 'src/entities/**/*' },
-        { type: 'shared', pattern: 'src/shared/**/*' },
+        { type: 'app', pattern: 'src/app/*' },
+        { type: 'pages', pattern: 'src/pages/*' },
+        { type: 'widgets', pattern: 'src/widgets/*' },
+        { type: 'features', pattern: 'src/features/*' },
+        { type: 'entities', pattern: 'src/entities/*' },
+        { type: 'shared', pattern: 'src/shared/*' },
       ],
       'boundaries/config': { type: 'project' },
     },
     rules: {
-      // --- СТИЛЬ КОДА (Замена Prettier) ---
+      // --- СТИЛЬ КОДА ---
       'no-console': 'warn',
       'semi': ['error', 'always'],
       'quotes': ['error', 'single', { avoidEscape: true }],
@@ -60,7 +60,7 @@ export default ts.config(
       'comma-dangle': ['error', 'always-multiline'],
       'object-curly-spacing': ['error', 'always'],
       'key-spacing': ['error', { beforeColon: false, afterColon: true }],
-      'no-unused-vars': 'off', // Отключаем базовый, так как работает TS версия
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['warn'],
 
       // --- VUE ФОРМАТИРОВАНИЕ ---
@@ -85,27 +85,62 @@ export default ts.config(
       // --- АРХИТЕКТУРА FSD (версия плагина 6+) ---
       'boundaries/dependencies': ['error', {
         default: 'disallow',
+        // 🔥 Общее сообщение для всех запрещённых импортов
+        message: '🚫 Нарушение архитектуры FSD. Слой "{{ from.type }}" не может импортировать слой "{{ to.type }}".\nИерархия слоёв: app → pages → widgets → features → entities → shared.\nИмпорт возможен только сверху вниз или внутри своего слайса.',
         rules: [
-          // ... все ваши правила иерархии (app → pages, pages → widgets и т.д.) ...
-
-          // 👇 Разрешаем импорты из корневого index.* каждого слайса
+          // 1. Иерархия слоёв FSD
           {
-            from: { type: ['app', 'pages', 'widgets', 'features', 'entities', 'shared'] },
-            to: {
-              type: ['pages', 'widgets', 'features', 'entities'],
-              path: 'src/*/*/index.*'          // ← именно index файлы
-            },
-            allow: '*'
+            from: { type: 'app' },
+            allow: [{ to: { type: ['pages', 'widgets', 'features', 'entities', 'shared'] } }]
+          },
+          {
+            from: { type: 'pages' },
+            allow: [{ to: { type: ['widgets', 'features', 'entities', 'shared'] } }]
+          },
+          {
+            from: { type: 'widgets' },
+            allow: [{ to: { type: ['features', 'entities', 'shared'] } }]
+          },
+          {
+            from: { type: 'features' },
+            allow: [{ to: { type: ['entities', 'shared'] } }]
+          },
+          {
+            from: { type: 'entities' },
+            allow: [{ to: { type: ['shared'] } }]
+          },
+          {
+            from: { type: 'shared' },
+            allow: [{ to: { type: ['shared'] } }]
           },
 
-          // 👇 Запрещаем всё остальное внутри слайса (deep imports)
+          // 2. Внутренние импорты
           {
-            to: {
-              type: ['pages', 'widgets', 'features', 'entities'],
-              path: 'src/*/*/**/*'
-            },
-            disallow: '*',
-            message: 'Нарушение Public API: импортируй только через index.ts слайса'
+            from: { type: 'pages' },
+            allow: [{ to: { type: 'pages' } }]
+          },
+          {
+            from: { type: 'widgets' },
+            allow: [{ to: { type: 'widgets' } }]
+          },
+          {
+            from: { type: 'features' },
+            allow: [{ to: { type: 'features' } }]
+          },
+          {
+            from: { type: 'entities' },
+            allow: [{ to: { type: 'entities' } }]
+          },
+
+          // 3. Public API
+          {
+            from: { type: '*' },
+            allow: [{
+              to: {
+                type: ['pages', 'widgets', 'features', 'entities'],
+                internalPath: 'index.*'
+              }
+            }]
           }
         ]
       }]
