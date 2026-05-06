@@ -8,6 +8,8 @@
       Добавить пользователя
     </Button>
 
+    <AddUserButton severity="info" />
+
     <div class="user-page__grid">
       <UserCard
         v-for="(user) in users"
@@ -19,10 +21,6 @@
         </template>
       </UserCard>
     </div>
-
-    <button @click="store.removeUser('2')">
-      Remove
-    </button>
   </div>
 </template>
 
@@ -32,6 +30,7 @@ import Button from 'primevue/button';
 import { useUserStore } from '@/entities/user';
 import { UserCard } from '@/entities/user';
 import { RemoveUserButton } from '@/features/removeUser';
+import { AddUserButton } from '@/features/addUser';
 import PageHeader from '@/shared/ui/layout/PageHeader.vue';
 
 const store = useUserStore();
