@@ -15,29 +15,18 @@
         :user="user"
       />
     </div>
-
-    <input v-model="userId" type="text" />
-    <button type="submit" @click="handleRemove">
-      Save
-    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import Button from 'primevue/button';
 import { useUserStore } from '@/entities/user';
 import { UserCard } from '@/entities/user';
 import PageHeader from '@/shared/ui/layout/PageHeader.vue';
 
-const userId = ref<string>('');
 const store = useUserStore();
 const { users } = storeToRefs(store);
-
-function handleRemove() {
-  store.removeUser(userId.value);
-}
 
 defineOptions({ name: 'UserPage' });
 </script>

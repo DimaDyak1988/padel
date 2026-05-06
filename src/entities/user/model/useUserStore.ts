@@ -13,8 +13,13 @@ export const useUserStore = defineStore(USERS_STORE_NAME, () => {
     users.value = users.value.filter((user) => user.id !== id);
   }
 
+  function getUserByRole(role: string) {
+    users.value = users.value.filter((user) => user.role === role);
+  }
+
   return {
     users,
     removeUser,
+    getUserByRole,
   };
 });
