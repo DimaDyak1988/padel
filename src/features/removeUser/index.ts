@@ -1,1 +1,1 @@
-export { default as RemoveUserButton } from './ui/removeUserButton.vue';
+export { default as RemoveUserButton } from './ui/RemoveUserButton.vue';

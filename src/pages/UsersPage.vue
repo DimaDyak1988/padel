@@ -4,10 +4,6 @@
       <h2>Пользователи</h2>
     </PageHeader>
 
-    <Button severity="info">
-      Добавить пользователя
-    </Button>
-
     <AddUserButton severity="info" />
 
     <div class="user-page__grid">
@@ -26,7 +22,6 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import Button from 'primevue/button';
 import { useUserStore } from '@/entities/user';
 import { UserCard } from '@/entities/user';
 import { RemoveUserButton } from '@/features/removeUser';

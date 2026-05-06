@@ -1,9 +1,15 @@
 <template>
   <div class="container">
     <RouterView />
+
+    <ConfirmPopup />
   </div>
 </template>
 
+<script setup lang="ts">
+import ConfirmPopup from 'primevue/confirmpopup';
+
+</script>
 <style lang="scss" scoped>
   .container {
     max-width: 1280px;

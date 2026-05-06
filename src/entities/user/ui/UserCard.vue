@@ -43,8 +43,7 @@
 import { computed  } from 'vue';
 import { Tag } from 'primevue';
 import Avatar from 'primevue/avatar';
-import type { User } from '../model/user';
-import type { UserRole } from '../model/userRole';
+import type { User } from '@/entities/user';
 import Rating from '@/shared/ui/Rating.vue';
 import defaultAvatar from '@/assets/images/avatar_default.png';
 
@@ -59,13 +58,13 @@ const contact = user.contact || 'не указан';
 const rating = computed(() => user.rating || 0);
 const name = computed(() => user.name);
 
-const roleLabels: Record<UserRole, string> = {
-  player: 'Игрок',
-  coach: 'Тренер',
-  admin: 'Админ',
-};
+// const roleLabels: Record<UserRole, string> = {
+//   player: 'Игрок',
+//   coach: 'Тренер',
+//   admin: 'Админ',
+// };
 
-const roleLabel = roleLabels[user.role];
+// const roleLabel = roleLabels[user.role];
 
 // const roleClasses: Record<UserRole, string> = {
 //   player: 'role-player',

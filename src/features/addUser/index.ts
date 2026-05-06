@@ -1,1 +1,1 @@
-export { default as AddUserButton } from './ui/addUserButton.vue';
+export { default as AddUserButton } from './ui/AddUserButton.vue';

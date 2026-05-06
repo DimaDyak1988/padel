@@ -19,16 +19,8 @@ export const useUserStore = defineStore(USERS_STORE_NAME, () => {
     users.value = mockData;
   }
 
-  function addUser() {
-    users.value.push({
-      id: Date.now().toString(),
-      contact: 'New  Player',
-      name: `Мария Петрова ${Date.now()}`,
-      role: 'player',
-      rating: 4,
-      avatar: 'https://i.pravatar.cc/100?img=2',
-    });
-
+  function addUser(user: Omit<User, 'id'>) {
+    users.value.push({ ...user, id: Date.now().toString() });
     setLocalStorageItem('users', users.value);
   }
 
@@ -38,7 +30,7 @@ export const useUserStore = defineStore(USERS_STORE_NAME, () => {
   }
 
   function getUserByRole(role: string) {
-    users.value = users.value.filter((user) => user.role === role);
+    return users.value.filter((user) => user.role === role);
   }
 
   return {

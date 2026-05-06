@@ -13,6 +13,11 @@ defineOptions({ name: 'AddUserButton' });
 const { addUser } = useUserStore();
 
 function handleAddUser() {
-  addUser();
+  addUser({
+    contact: 'dmitryfedorov',
+    name: `Дмитрий Фёдоров ${Date.now()}`,
+    role: 'player',
+    rating: 4,
+  });
 }
 </script>
