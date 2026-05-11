@@ -22,8 +22,14 @@ export const useUserStore = defineStore(USERS_STORE_NAME, () => {
   }
 
   async function addUser(user: Omit<User, 'id'>) {
-    users.value.push({ ...user, id: nanoid(4) });
-    setLocalStorageItem('users', users.value); // Убрать отсюда
+    try {
+      users.value.push({ ...user, id: nanoid(4) });
+      setLocalStorageItem('users', users.value); // Убрать отсюда
+    }
+    catch (error) {
+      console.error(error);
+    }
+
   }
 
   async function removeUser(id: User['id']) {

@@ -69,6 +69,7 @@
       <Button
         type="submit"
         severity="info"
+        :is-loading="isSubmitting"
       >
         {{ submitName }}
       </Button>
@@ -97,6 +98,7 @@ type UserCreateUpdate = UserCreate | UserUpdate;
 defineProps<{
   initialForm: UserCreateUpdate;
   submitName: string;
+  isSubmitting?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -104,7 +106,6 @@ const emit = defineEmits<{
 }>();
 
 const resolver = valibotResolver(UserCreateSchema);
-
 
 function handleSubmit(event: FormSubmitEvent) {
   if (event.valid) {
