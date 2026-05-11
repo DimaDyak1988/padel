@@ -1,5 +1,6 @@
 <template>
   <div class="rating">
+    Рейтинг: <span class="rating-number">{{ value }}</span>
     <span
       v-for="i in max"
       :key="i"
@@ -8,19 +9,17 @@
       <span v-if="i <= Math.floor(value)">★</span>
       <span v-else>☆</span>
     </span>
-    <span class="rating-number">{{ value }}/{{ max }}</span>
   </div>
 </template>
 
 <script setup lang="ts">
   interface Props {
     value: number;
-    max?: number;
   }
 
 const props = defineProps<Props>();
-const max = props.max || 5;
 const value = props.value;
+const max = 5;
 </script>
 
 <style scoped lang="scss">
@@ -36,7 +35,7 @@ const value = props.value;
   }
 
   .rating-number {
-    margin-left: 8px;
+    margin-right: var(--space-xs);
     font-weight: 500;
     color: #212529;
   }

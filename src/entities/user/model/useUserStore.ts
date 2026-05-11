@@ -1,42 +1,41 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import type { User } from './user';
+import { nanoid } from 'nanoid';
+import type { User } from './types';
 import { USERS_STORE_NAME, USERS_SCHEMA } from '../config/constants';
-import mockData from './mockData';
 import { useLocalStorage } from '@/shared/composables/useLocalStorage';
+import { getUsers } from '../api';
 
-const { setLocalStorageItem, getLocalStorageItem } = useLocalStorage<USERS_SCHEMA>();
+const { setLocalStorageItem  } = useLocalStorage<USERS_SCHEMA>(); // Убрать отсюда
 
 export const useUserStore = defineStore(USERS_STORE_NAME, () => {
   const users = ref<User[]>([]);
+  const isLoading = ref(false);
 
-  const localStorageUsers = getLocalStorageItem('users');
-
-  if (localStorageUsers) {
-    users.value = localStorageUsers;
-  }
-  else {
-    users.value = mockData;
-  }
-
-  function addUser(user: Omit<User, 'id'>) {
-    users.value.push({ ...user, id: Date.now().toString() });
-    setLocalStorageItem('users', users.value);
+  async function fetchUsers() {
+    isLoading.value = true;
+    try {
+      users.value =  await getUsers();
+    } finally {
+      isLoading.value = false;
+    }
   }
 
-  function removeUser(id: User['id']) {
+  async function addUser(user: Omit<User, 'id'>) {
+    users.value.push({ ...user, id: nanoid(4) });
+    setLocalStorageItem('users', users.value); // Убрать отсюда
+  }
+
+  async function removeUser(id: User['id']) {
     users.value = users.value.filter((user) => user.id !== id);
     setLocalStorageItem('users', users.value);
   }
 
-  function getUserByRole(role: string) {
-    return users.value.filter((user) => user.role === role);
-  }
-
   return {
     users,
+    isLoading,
+    fetchUsers,
     addUser,
     removeUser,
-    getUserByRole,
   };
 });

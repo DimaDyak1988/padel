@@ -1,6 +1,17 @@
-export { UserRoleSchema } from './model/user';
-export { UserSchema } from './model/user';
+export {
+  UserSchema,
+  UserCreateSchema,
+} from './model/types';
+
 export { useUserStore } from './model/useUserStore';
-export type { UserRole, User } from './model/user';
+
+export type {
+  UserRole,
+  User,
+  UserCreate,
+  UserUpdate,
+} from './model/types';
+
 export { default as UserCard } from './ui/UserCard.vue';
+export { default as UserForm } from './ui/UserForm.vue';
 

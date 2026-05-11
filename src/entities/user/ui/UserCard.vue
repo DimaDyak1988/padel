@@ -12,15 +12,15 @@
 
       <div class="user-card__info">
         <div class="user-card__name">
-          {{ name }}
+          {{ name }} {{ lastName }}
         </div>
 
-        <div class="tags">
-          <Tag
-            :value="roleLabel"
-            severity="contrast"
-          />
-        </div>
+        <!--        <div class="tags">-->
+        <!--          <Tag-->
+        <!--            :value="roleLabel"-->
+        <!--            severity="contrast"-->
+        <!--          />-->
+        <!--        </div>-->
       </div>
     </div>
 
@@ -47,88 +47,69 @@ import type { User } from '@/entities/user';
 import Rating from '@/shared/ui/Rating.vue';
 import defaultAvatar from '@/assets/images/avatar_default.png';
 
-const props = defineProps<{
+const { user } = defineProps<{
   user: User;
 }>();
-
-const { user } = props;
 
 const avatarUrl = user.avatar || defaultAvatar;
 const contact = user.contact || 'не указан';
 const rating = computed(() => user.rating || 0);
 const name = computed(() => user.name);
-
-// const roleLabels: Record<UserRole, string> = {
-//   player: 'Игрок',
-//   coach: 'Тренер',
-//   admin: 'Админ',
-// };
-
-// const roleLabel = roleLabels[user.role];
-
-// const roleClasses: Record<UserRole, string> = {
-//   player: 'role-player',
-//   coach: 'role-coach',
-//   admin: 'role-admin',
-// };
-//
-// const roleLabels: Record<UserRole, string> = {
-//   player: 'Игрок',
-//   coach: 'Тренер',
-//   admin: 'Админ',
-// };
-//
-// const roleClass = roleClasses[props.role];
-// const label = roleLabels[props.role];
+const lastName = computed(() => user.lastName);
 
 </script>
 
 <style scoped lang="scss">
-  .user-card {
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm-high);
-  }
+.user-card {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm-high);
+}
 
-  .user-card__top {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-  }
+.user-card__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
 
-  .user-card__info {
-    display: flex;
-    gap: var(--space-xs);
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-  }
+.user-card__info {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .user-card__avatar {
-    border: 1px solid #ccc;
+.user-card__avatar {
+  border: 1px solid #ccc;
 
-    > :deep(img) {
-      object-fit: cover;
-    }
+  > :deep(img) {
+    object-fit: cover;
   }
+}
 
-  .user-card__name {
-    font-weight: 600;
-    font-size: var(--fs-base);
-    color: #212529;
-  }
+.user-card__name {
+  font-weight: 600;
+  font-size: var(--fs-base);
+  color: #212529;
+}
 
-  .user-card__role {
-    font-size: var(--fs-sm);
-    color: #495057;
-  }
+.user-card__role {
+  font-size: var(--fs-sm);
+  color: #495057;
+}
 
-  .user-card__contact {
-    word-break: break-all;
-  }
+.user-card__contact {
+  word-break: break-all;
+}
+
+.user-card__actions {
+  display: flex;
+  gap: var(--space-sm);
+}
 </style>

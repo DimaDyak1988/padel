@@ -5,7 +5,7 @@
   --color-danger: #DC3545;
   --color-warning: #FFC107;
 
-  --color-bg: #F3F3F3;
+  --color-bg: #f6f7f9;
   --color-surface: #FFFFFF;
   --color-border: #E6E7EC;
 
@@ -46,3 +46,4 @@ h1, h2, h3 {
   font-family: var(--font-hd);
   margin: 0;
 }
+
