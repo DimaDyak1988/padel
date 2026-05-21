@@ -1,6 +1,39 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
-import './types/example'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import PrimeVue from 'primevue/config';
+import { definePreset } from '@primeuix/themes';
+import Aura from '@primeuix/themes/aura';
+import ConfirmationService from 'primevue/confirmationservice';
+import ToastService from 'primevue/toastservice';
+import router from './router';
+import './style.css';
+import App from './App.vue';
 
-createApp(App).mount('#app')
+const pinia = createPinia();
+const app = createApp(App);
+
+const MyCustomPreset = definePreset(Aura, {
+  semantic: {
+    colorScheme: {
+      light: {
+        formField: {
+          focusBorderColor: '{stone.800}',
+        },
+      },
+    },
+  },
+});
+
+app.use(pinia);
+app.use(router);
+app.use(PrimeVue, {
+  theme: {
+    preset: MyCustomPreset,
+  },
+});
+app.use(ConfirmationService);
+app.use(ToastService);
+app.mount('#app');
+
+
+

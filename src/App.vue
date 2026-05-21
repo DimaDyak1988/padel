@@ -1,31 +1,28 @@
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="container">
+    <RouterView />
+
+    <ConfirmPopup />
+    <Toast />
   </div>
-  
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+import ConfirmPopup from 'primevue/confirmpopup';
+import Toast from 'primevue/toast';
 
+</script>
 <style lang="scss" scoped>
-.logo {
-  height: 120px;
-  padding: 15px;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.container {
+  max-width: 1280px;
+  margin: var(--space-lg) auto;
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 32px 40px;
+  box-shadow:
+    0 1px 2px rgba(16, 24, 40, 0.04),
+    0 4px 8px rgba(16, 24, 40, 0.06),
+    0 12px 24px rgba(16, 24, 40, 0.08);
+  border: 1px solid rgba(16, 24, 40, 0.06);
 }
 </style>

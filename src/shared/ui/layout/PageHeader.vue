@@ -1,0 +1,13 @@
+<template>
+  <div class="page-header">
+    <slot />
+  </div>
+</template>
+
+<style lang="scss" scoped>
+  .page-header {
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+</style>
