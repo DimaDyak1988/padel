@@ -19,7 +19,7 @@
 
 const props = defineProps<Props>();
 const value = props.value;
-const max = 5;
+const max = 6;
 </script>
 
 <style scoped lang="scss">

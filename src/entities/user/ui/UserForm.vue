@@ -18,7 +18,9 @@
         >
           <InputText />
         </FormField>
+      </FormRow>
 
+      <FormRow>
         <FormField
           name="lastName"
           label="Фамилия"
@@ -32,6 +34,7 @@
         <FormField
           name="contact"
           label="Контакт"
+          required
         >
           <InputText />
         </FormField>
@@ -51,16 +54,19 @@
           name="rating"
           label="Рейтинг"
         >
-          <Slider
-            :min="1"
-            :max="6"
-            :step="0.1"
-            class="user-form__slider"
+          <KnobRating
+            v-if="$form.rating"
+            v-model="$form.rating.value"
           />
+        </FormField>
+      </FormRow>
 
-          <div class="user-form__slider-value">
-            {{ $form.rating?.value }}
-          </div>
+      <FormRow>
+        <FormField name="avatar">
+          <FileUploader
+            v-if="$form.avatar"
+            v-model="$form.avatar.value"
+          />
         </FormField>
       </FormRow>
     </div>
@@ -87,42 +93,43 @@
 </template>
 
 <script setup lang="ts" generic="TSchema extends ObjectSchema<ObjectEntries, any>">
-import { ref  } from 'vue';
+import { ref } from 'vue';
 import type { InferOutput, ObjectSchema, ObjectEntries } from 'valibot';
 import { valibotResolver } from '@primevue/forms/resolvers/valibot';
 import { Form } from '@primevue/forms';
 import type { FormSubmitEvent } from '@primevue/forms';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-import Slider from 'primevue/slider';
-import { useToast } from 'primevue/usetoast';
 import Select from '@/shared/ui/Select.vue';
 import FormRow from '@/shared/ui/forms/FormRow.vue';
 import FormField from '@/shared/ui/forms/FormField.vue';
-import { roleOptions } from '../config/constants';
-
-defineOptions({ name: 'UserForm' });
+import KnobRating from '@/shared/ui/KnobRating.vue';
+import FileUploader from '@/shared/ui/forms/FileUploader.vue';
+import { roleOptionsStatic } from '../config/index';
+import type { RoleOption } from '../model/types';
 
 type FormRef = InstanceType<typeof Form> & { reset: () => void };
 
 const props = withDefaults(defineProps<{
   schema: TSchema;
   initialForm: InferOutput<TSchema>;
+  roleOptions?: RoleOption[];
   submitButtonName?: string;
   isPending?: boolean;
   hasResetButton?: boolean;
 }>(), {
+  roleOptions: roleOptionsStatic,
   submitButtonName: 'Сохранить пользователя',
   hasResetButton: false,
 });
 
 const emit = defineEmits<{
   (e: 'submit', values: InferOutput<TSchema>): void;
+  (e: 'validation-error'): void
 }>();
 
 const resolver = valibotResolver(props.schema);
 const formRef = ref<FormRef | null>(null);
-const toast = useToast();
 
 function handleResetForm() {
   formRef?.value?.reset();
@@ -130,14 +137,11 @@ function handleResetForm() {
 
 function handleSubmit(event: FormSubmitEvent) {
   if (!event.valid) {
-    toast.add({
-      severity: 'warn',
-      summary: 'Проверьте корректность заполнения формы',
-      life: 2000,
-    });
+    emit('validation-error');
     return;
   }
-  emit('submit', event.values);
+
+  emit('submit', event.values as InferOutput<TSchema>);
 }
 
 defineExpose({

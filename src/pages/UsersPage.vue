@@ -6,6 +6,7 @@
 
     <h3 v-if="isLoading">
       Загрузка пользователей...
+      <ProgressBar mode="indeterminate" style="height: 12px" />
     </h3>
 
     <template v-else>
@@ -17,7 +18,7 @@
 
       <div class="user-page__grid">
         <UserCard
-          v-for="user in users"
+          v-for="user in users ?? []"
           :key="user.id"
           :user="user"
         >
@@ -30,7 +31,11 @@
               />
             </RouterLink>
 
-            <RemoveUserButton :id="user.id" />
+            <RemoveUserButton
+              :id="user.id"
+              @remove-success="handleRemoveSuccess"
+              @remove-failure="handleRemoveFailure"
+            />
           </template>
         </UserCard>
       </div>
@@ -40,19 +45,42 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { onMounted } from 'vue';
+import { onBeforeUnmount, onMounted } from 'vue';
+import { useToast } from 'primevue/usetoast';
 import Button from 'primevue/button';
-import { useUserStore } from '@/entities/user';
-import { UserCard } from '@/entities/user';
+import ProgressBar from 'primevue/progressbar';
+import { useUsersStore, UserCard } from '@/entities/user';
 import { RemoveUserButton } from '@/features/remove-user';
 import PageHeader from '@/shared/ui/layout/PageHeader.vue';
+import { getErrorMessage } from '@/shared/lib/getErrorMessage';
 
-defineOptions({ name: 'UserPage' });
+const toast = useToast();
+const usersStore = useUsersStore();
+const { users, isLoading  } = storeToRefs(usersStore);
+const controller = new AbortController();
 
-const store = useUserStore();
-const { users, isLoading } = storeToRefs(store);
+function handleRemoveSuccess(userId: string) {
+  usersStore.removeUser(userId);
+  toast.add({
+    severity: 'success',
+    summary: 'Пользователь удален',
+    life: 3000,
+  });
+}
 
-onMounted(store.fetchUsers);
+function handleRemoveFailure(error: unknown) {
+  toast.add({
+    severity: 'error',
+    summary: getErrorMessage(error),
+    life: 5000,
+  });
+}
+
+onMounted(async () => {
+  await usersStore.fetchUsers(controller.signal);
+});
+
+onBeforeUnmount(() => controller.abort());
 </script>
 
 <style lang="scss" scoped>

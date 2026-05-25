@@ -6,6 +6,7 @@ import Aura from '@primeuix/themes/aura';
 import ConfirmationService from 'primevue/confirmationservice';
 import ToastService from 'primevue/toastservice';
 import router from './router';
+import 'primeicons/primeicons.css';
 import './style.css';
 import App from './App.vue';
 

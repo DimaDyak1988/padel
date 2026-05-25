@@ -1,8 +1,7 @@
 <template>
   <UserForm
-    ref="formRef"
     :schema="UserFormSchema"
-    :initial-form="userForm"
+    :initial-form="initialForm"
     :is-pending="isPending"
     has-reset-button
     @submit="handleCreateUser"
@@ -10,37 +9,27 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useToast } from 'primevue/usetoast';
-import { UserFormSchema, UserForm } from '@/entities/user';
-import type { CreateUser } from '@/entities/user';
+import { UserFormSchema, UserForm, type CreateUserPayload } from '@/entities/user';
 import { useCreateUser } from '../model/useCreateUser';
 
-defineOptions({ name: 'CreateUserForm' });
-
-const router = useRouter();
-const toast = useToast();
-const formRef = ref(null);
+const emit = defineEmits<{
+  (e: 'create-success'): void,
+  (e: 'create-failure', error: unknown): void,
+}>();
 
 const {
-  userForm,
+  initialForm,
   isPending,
   createUser,
 } = useCreateUser();
 
-async function handleCreateUser(user: CreateUser) {
+async function handleCreateUser(user: CreateUserPayload) {
   try {
     await createUser(user);
-    router.push({ name: 'users' });
-    formRef.value?.reset();
+    emit('create-success');
   }
   catch(error) {
-    toast.add({
-      severity: 'error',
-      summary: error.message,
-      life: 3000,
-    });
+    emit('create-failure', error);
   }
 }
 </script>

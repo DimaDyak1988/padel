@@ -3,7 +3,7 @@
     <div class="user-card__top">
       <Avatar
         :image="avatarUrl"
-        :alt="name"
+        :alt="user.name"
         shape="circle"
         size="xlarge"
 
@@ -12,25 +12,18 @@
 
       <div class="user-card__info">
         <div class="user-card__name">
-          {{ name }} {{ lastName }}
+          {{ user.name }} {{ user.lastName }}
         </div>
-
-        <!--        <div class="tags">-->
-        <!--          <Tag-->
-        <!--            :value="roleLabel"-->
-        <!--            severity="contrast"-->
-        <!--          />-->
-        <!--        </div>-->
       </div>
     </div>
 
     <div class="user-card__contact">
-      @{{ contact }}
+      @{{ user.contact }}
     </div>
 
     <Rating
       class="user-card__rating"
-      :value="rating"
+      :value="user.rating"
     />
 
     <div class="user-card__actions">
@@ -40,8 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed  } from 'vue';
-import { Tag } from 'primevue';
 import Avatar from 'primevue/avatar';
 import type { User } from '@/entities/user';
 import Rating from '@/shared/ui/Rating.vue';
@@ -52,11 +43,6 @@ const { user } = defineProps<{
 }>();
 
 const avatarUrl = user.avatar || defaultAvatar;
-const contact = user.contact || 'не указан';
-const rating = computed(() => user.rating || 0);
-const name = computed(() => user.name);
-const lastName = computed(() => user.lastName);
-
 </script>
 
 <style scoped lang="scss">

@@ -1,27 +1,22 @@
-import HomePage from '@/pages/HomePage.vue';
-import UsersPage from '@/pages/UsersPage.vue';
-import CreateUserPage from '@/pages/CreateUserPage.vue';
-import UpdateUserPage from '@/pages/UpdateUserPage.vue';
-
 export default [
   {
     path: '/',
     name: 'home',
-    component: HomePage,
+    component: () => import('@/pages/HomePage.vue'),
   },
   {
     path: '/users',
     name: 'users',
-    component: UsersPage,
+    component: () => import('@/pages/UsersPage.vue'),
   },
   {
     path: '/users/create',
     name: 'create-user',
-    component: CreateUserPage,
+    component: () => import('@/pages/CreateUserPage.vue'),
   },
   {
     path: '/users/edit/:id',
     name: 'update-user',
-    component: UpdateUserPage,
+    component: () => import('@/pages/UpdateUserPage.vue'),
   },
 ];

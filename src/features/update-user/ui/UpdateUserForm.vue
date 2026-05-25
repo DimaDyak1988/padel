@@ -1,45 +1,74 @@
 <template>
   <div class="update-user-form">
+    <h3 v-if="isLoading">
+      Загрузка пользователей...
+      <ProgressBar
+        mode="indeterminate"
+        style="height: 12px"
+      />
+    </h3>
+
     <UserForm
-      v-if="userFormModel"
+      v-else-if="!isLoading && initialFormModel"
       :schema="UserFormSchema"
-      :initial-form="userFormModel"
+      :initial-form="initialFormModel"
       :is-pending="isPending"
       @submit="handleUpdateUser"
     />
+
+    <RouterLink to="/users">
+      Список пользователей
+    </RouterLink>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router';
-import { useToast } from 'primevue/usetoast';
-import { UserForm } from '@/entities/user';
-import { type UpdateUser, UserFormSchema } from '@/entities/user';
-import { useUpdateUser } from '@/features/update-user';
-import { useUserForm } from '@/features/update-user';
-import { useRouteParam } from '@/shared/lib/useRouteId';
+import { watch, onWatcherCleanup } from 'vue';
+import ProgressBar from 'primevue/progressbar';
+import type { UpdateUserPayload } from '@/entities/user';
+import { UserFormSchema, UserForm } from '@/entities/user';
+import { useRouteParam } from '@/shared/composables/useRouteParam';
+import { useUpdateUserForm } from '../model/useUpdateUserForm';
 
-defineOptions({ name: 'UpdateUserForm' });
+const emit = defineEmits<{
+  (e: 'update-success'): void,
+  (e: 'update-failure', error: unknown): void,
+  (e: 'fetch-user-failure', error: unknown): void,
+}>();
 
-const router = useRouter();
-const toast = useToast();
 const userId = useRouteParam('id');
+const {
+  isPending,
+  isLoading,
+  initialFormModel,
+  fetchUser,
+  updateUser,
+} = useUpdateUserForm();
 
-const { isPending, updateUser } = useUpdateUser(userId);
-const { userFormModel } = useUserForm(userId);
+watch(userId, async (id) => {
+  if (!id) return;
+  const controller = new AbortController();
+  onWatcherCleanup(() => { controller.abort(); });
 
-async function handleUpdateUser(updatedUser: UpdateUser) {
   try {
-    await updateUser(updatedUser);
-    toast.add({
-      severity: 'success',
-      summary: 'Данные пользователя изменены!',
-      life: 3000,
-    });
-    router.push({ name: 'users' });
+    await fetchUser(id, controller.signal);
   }
   catch (error) {
-    console.error(error);
+    emit('fetch-user-failure', error);
+  }
+}, {
+  immediate: true,
+});
+
+async function handleUpdateUser(user: UpdateUserPayload) {
+  if (!userId.value) return;
+
+  try {
+    await updateUser(userId.value, user);
+    emit('update-success');
+  }
+  catch (error) {
+    emit('update-failure', error);
   }
 }
 </script>
