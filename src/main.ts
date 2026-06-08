@@ -30,6 +30,9 @@ app.use(router);
 app.use(PrimeVue, {
   theme: {
     preset: MyCustomPreset,
+    options: {
+      darkModeSelector: 'none',
+    },
   },
 });
 app.use(ConfirmationService);
