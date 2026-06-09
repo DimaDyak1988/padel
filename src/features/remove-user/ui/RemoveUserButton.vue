@@ -1,19 +1,19 @@
 <template>
   <Button
-    type="button"
-    severity="danger"
-    label="Удалить"
-    size="small"
+    variant="danger"
+    outlined
     :loading="isPending"
     @click="handleRemove"
-  />
+  >
+    Удалить
+  </Button>
 </template>
 
 <script lang="ts" setup>
-import Button from 'primevue/button';
-import { useConfirm } from 'primevue/useconfirm';
 import { useRemoveUser } from '../model/useRemoveUser';
 import { type User } from '@/entities/user';
+import { Button } from '@/shared/ui';
+import { usePopover } from '@/shared/ui/Popover';
 
 const props = defineProps<{
   id: User['id']
@@ -24,22 +24,16 @@ const emit = defineEmits<{
   (e: 'remove-failure', error: unknown): void,
 }>();
 
-const confirm = useConfirm();
+const popover = usePopover();
 const { isPending, handleRemoveUser } = useRemoveUser();
 
-function handleRemove() {
-  confirm.require({
-    message: 'Вы хотите удалить пользователя ?',
-    acceptProps: {
-      label: 'Удалить',
-      severity: 'danger',
-    },
-    rejectProps: {
-      label: 'Отменить',
-      severity: 'secondary',
-      outlined: true,
-    },
-    accept: async () => {
+function handleRemove(event: MouseEvent) {
+  popover.open({
+    target: event.currentTarget as HTMLElement,
+    acceptName: 'Удалить',
+    cancelName: 'Отменить',
+    message: 'Вы хотите удалить пользователя?',
+    onConfirm: async () => {
       try {
         await handleRemoveUser(props.id);
         emit('remove-success', props.id);
@@ -51,3 +45,4 @@ function handleRemove() {
   });
 }
 </script>
+

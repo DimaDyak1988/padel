@@ -28,7 +28,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import Button from 'primevue/button';
-import FileUploaderPreview from '@/shared/ui/FileUploaderPreview.vue';
+import { FileUploaderPreview } from '@/shared/ui';
 
 const modelValue = defineModel<File | string | null>({ default: null });
 const fileInputRef = ref<HTMLInputElement | null>(null);
