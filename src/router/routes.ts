@@ -3,6 +3,7 @@ export default [
     path: '/',
     name: 'home',
     component: () => import('@/pages/HomePage.vue'),
+    redirect: { name: 'users' },
   },
   {
     path: '/users',
@@ -18,5 +19,10 @@ export default [
     path: '/users/edit/:id',
     name: 'update-user',
     component: () => import('@/pages/UpdateUserPage.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/pages/NotFoundPage.vue'),
   },
 ];
