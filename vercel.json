@@ -4,7 +4,12 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
 
+  "cleanUrls": true,
   "rewrites": [
+    {
+      "source": "/example",
+      "destination": "/example/index.html"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
