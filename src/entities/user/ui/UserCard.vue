@@ -2,10 +2,12 @@
   <article class="user-card">
     <div class="user-card__avatar">
       <Avatar
-        v-if="user.avatar"
-        :src="user.avatar"
+        :src="user.avatar ?? ''"
+        :full-name="fullName"
+        :user-id="user.id"
         :alt="user.name"
-        size="xl"
+        size="lg"
+        is-online
       />
     </div>
 
@@ -69,9 +71,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { User } from '@/entities/user';
-import Avatar from './Avatar.vue';
 import RatingStars from './RatingStars.vue';
 import UserRoleLabel from './UserRoleLabel.vue';
+import { Avatar } from '@/shared/ui';
 
 const { user } = defineProps<{
   user: User
